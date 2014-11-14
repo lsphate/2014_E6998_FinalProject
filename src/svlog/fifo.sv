@@ -68,4 +68,21 @@ always_ff @(posedge clk) begin
    end
 end
 
+fifo_cover_entrynum_7:
+   cover property (@(posedge clk) ~rst & number_of_current_entries == 3'd7);
+fifo_cover_entrynum_6:
+   cover property (@(posedge clk) ~rst & number_of_current_entries == 3'd6);
+fifo_cover_entrynum_5:
+   cover property (@(posedge clk) ~rst & number_of_current_entries == 3'd5);
+fifo_cover_entrynum_4:
+   cover property (@(posedge clk) ~rst & number_of_current_entries == 3'd4);
+fifo_cover_entrynum_3:
+   cover property (@(posedge clk) ~rst & number_of_current_entries == 3'd3);
+fifo_cover_entrynum_2:
+   cover property (@(posedge clk) ~rst & number_of_current_entries == 3'd2);
+fifo_cover_entrynum_1:
+   cover property (@(posedge clk) ~rst & number_of_current_entries == 3'd1);
+fifo_cover_entrynum_0:
+   cover property (@(posedge clk) ~rst & number_of_current_entries == 3'd0);
+
 endmodule
