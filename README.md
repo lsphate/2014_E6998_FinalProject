@@ -25,7 +25,7 @@ All the properties are covered.
 ###C.
 Seeing the wave form of entrynum 5, we can notice that the number_of_current_entries has been decreased by 1 even it is already 0. This cause the veriable overflowed.
 
-![Picture](http://i.imgur.com/Kv5rQlD.png?1)
+![Picture](http://i.imgur.com/Kv5rQlD.png)
 
 This is that piece of code in fifo.sv:
 
@@ -34,5 +34,3 @@ This is that piece of code in fifo.sv:
       out_is_full <= 0;
       out_is_empty <= (number_of_current_entries == 1'b1);
     end
-
-###D.
