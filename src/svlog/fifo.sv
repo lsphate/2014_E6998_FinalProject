@@ -69,9 +69,9 @@ always_ff @(posedge clk) begin
 end
 
 fifo_assume_entry_empty:
-   assume property (@(posedge clk) out_is_empty |-> ##[0:1] ~in_read_ctrl);
+   assume property (@(posedge clk) out_is_empty |-> ~in_read_ctrl);
 fifo_assume_entry_full:
-   assume property (@(posedge clk) out_is_full |-> ##[0:1] ~in_write_ctrl);
+   assume property (@(posedge clk) out_is_full |-> ~in_write_ctrl);
 
 fifo_cover_entrynum_7:
    cover property (@(posedge clk) number_of_current_entries == 3'b111);
