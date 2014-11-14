@@ -50,5 +50,17 @@ Analyze the wave form and we will notice that the veriable "out_is_empty" will a
 ![Picture 2](http://i.imgur.com/cM7aZ3y.png?2)
 
 ###G.
+The bug is because of these 2 line:
+
+	out_is_empty <= 0;
+	out_is_full <= 0;
+
 ###H.
+We try to fix the bug by adding these 2 lines:
+
+	out_is_empty <= out_is_empty;
+	out_is_full <= out_is_full;
+
 ###I.
+After our modification, the entrynum from 4 to 7 is uncovered anymore:
+![Picture 3](http://i.imgur.com/SsalMQA.png?1)
