@@ -23,7 +23,9 @@ We modify the **fifo.sv** and put it in *src/svlog/*, the cover proverties is li
 All the properties are covered.
 ###C.
 Seeing the wave form of entrynum 5, we can notice that the number_of_current_entries has been decreased by 1 even it is already 0. This cause the veriable overflowed.
+
 ![Picture1](http://i.imgur.com/Kv5rQlD.png?2)
+
 This is that piece of code in fifo.sv:
 
 	else if (in_read_ctrl & ~in_write_ctrl ) begin
@@ -44,7 +46,9 @@ This is what we add into fifo.c:
 Yay!
 ###F.
 Analyze the wave form and we will notice that the veriable "out_is_empty" will aribitary become 0 even when ther is no writing.
+
 ![Picture 2](http://i.imgur.com/cM7aZ3y.png?2)
+
 ###G.
 ###H.
 ###I.
