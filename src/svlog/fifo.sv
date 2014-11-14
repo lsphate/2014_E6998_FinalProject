@@ -63,8 +63,8 @@ always_ff @(posedge clk) begin
       out_is_full <= (number_of_current_entries == (ENTRIES-1'b1));
    end
    else if (~in_read_ctrl & ~in_write_ctrl) begin
-      out_is_empty <= 0;
-      out_is_full <= 0;
+      out_is_empty <= out_is_empty;
+      out_is_full <= out_is_full;
    end
 end
 
