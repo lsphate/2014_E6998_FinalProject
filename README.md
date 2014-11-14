@@ -16,7 +16,8 @@ We modify the **fifo.sv** and put it in *src/svlog/*, the cover proverties is li
 	fifo_cover_entrynum_2:
 		cover property (@(posedge clk) ~rst & number_of_current_entries == 3'd2);
 	fifo_cover_entrynum_1:
-		cover property (@(posedge clk) ~rst & number_of_current_entries == 3'd1);	fifo_cover_entrynum_0:
+		cover property (@(posedge clk) ~rst & number_of_current_entries == 3'd1);
+	fifo_cover_entrynum_0:
 		cover property (@(posedge clk) ~rst & number_of_current_entries == 3'd0);		
 ###B.
 All the properties are covered.
