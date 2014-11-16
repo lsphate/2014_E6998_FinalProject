@@ -72,7 +72,7 @@ fifo_assume_entry_empty:
    assume property (@(posedge clk) out_is_empty |-> ~in_read_ctrl);
 fifo_assume_entry_full:
    assume property (@(posedge clk) out_is_full |-> ~in_write_ctrl);
-
+/*
 fifo_cover_entrynum_7:
    cover property (@(posedge clk) number_of_current_entries == 3'b111);
 fifo_cover_entrynum_6:
@@ -89,5 +89,11 @@ fifo_cover_entrynum_1:
    cover property (@(posedge clk) number_of_current_entries == 3'b001);
 fifo_cover_entrynum_0:
    cover property (@(posedge clk) number_of_current_entries == 3'b000);
+*/
+generate
+for (genvar i = 0; i < (1 << (ENTRIES_LOG2 + 1)); i++) begin
+   cover property (@(posedge clk) number_of_current_entries == i);
+end
+endgenerate
 
 endmodule
