@@ -1,4 +1,7 @@
 #Formal Verification Phase II
+*Sun-Yi Lin (sl3833)*  
+*Jie-Gang Kuang (jk3735)*
+
 To do these tasks, we copied and modified the tutorials in the phase I. We merged the **fifo.sv** into the tutorial and modified the **Makefile** to make it work.
 ##Task 1
 ###A.
@@ -22,11 +25,14 @@ fifo_cover_entrynum_0:
 	cover property (@(posedge clk) ~rst & number_of_current_entries == 3'd0);
 ```
 ###B.
-All the properties are covered.
+All the properties are covered as follows:
+
+![Picture1](http://i.imgur.com/K39OekI.png)
+
 ###C.
 Seeing the wave form of entrynum 5, we can notice that the number_of_current_entries has been decreased by 1 even if it was 0. This cause the variable overflowed, becoming 0x111.
 
-![Picture1](http://i.imgur.com/Kv5rQlD.png?2)
+![Picture2](http://i.imgur.com/Kv5rQlD.png)
 
 This is that piece of code in the **fifo.sv**:
 ```
@@ -47,9 +53,9 @@ fifo_assume_entry_full:
 ###E.
 We run the test again with the additional assumptions.
 ###F.
-Analyze the wave form and we will notice that the variable "out_is_empty" will aribitarily become 0 even when there is no writing.
+After running the test again, the coverage is still the same. Analyzed the wave form and we noticed that the variable "out_is_empty" was aribitarily set 0 even when there is no writing.
 
-![Picture 2](http://i.imgur.com/cM7aZ3y.png?2)
+![Picture 3](http://i.imgur.com/cM7aZ3y.png)
 
 ###G.
 The bug is because of these 2 line:
@@ -66,4 +72,74 @@ out_is_full <= out_is_full;
 ###I.
 After our modification, the entrynum from 4 to 7 is not covered anymore:
 
-![Picture 3](http://i.imgur.com/SsalMQA.png?1)
+![Picture 4](http://i.imgur.com/SsalMQA.png)
+
+##Task 2
+In the Task 1, the running time with 4-entry queue is:
+	# ---------------------------------------
+	# Property Summary                  Count
+	# ---------------------------------------
+	# Assumed                               2
+	# Covered                               5
+	# Inconclusive                          0
+	# Uncoverable                           3
+	# ---------------------------------------
+	# Total                                10
+	# ---------------------------------------
+	#
+	#
+	# --------- Process Statistics ----------
+	# Elapsed Time (s):                     2
+	# -------------- remote:0 ---------------
+	# Total CPU Time (s):                   2
+	# Memory Used (MB):                  1089
+	# ---------------------------------------
+To accommodate the different sizes of the queue, we modified the codes of cover property as follows:
+```
+generate
+for (genvar i = 0; i < (1 << (ENTRIES_LOG2 + 1)); i++) begin
+   cover property (@(posedge clk) number_of_current_entries == i);
+end
+endgenerate
+```
+With the above modification and setting the number of entries to 64, we can the statistics of running time:
+	# ---------------------------------------
+	# Property Summary                  Count
+	# ---------------------------------------
+	# Assumed                               2
+	# Covered                              65
+	# Inconclusive                          0
+	# Uncoverable                          63
+	# ---------------------------------------
+	# Total                               130
+	# ---------------------------------------
+	#
+	#
+	# --------- Process Statistics ----------
+	# Elapsed Time (s):                   323
+	# -------------- remote:0 ---------------
+	# Total CPU Time (s):                 323
+	# Memory Used (MB):                  1089
+	# ---------------------------------------
+The formal runs take longer because they need to make sure whether the cover properties are covered or not. To test that, all the possible path should be tested. If it is proportional to the number of possible values which increase exponentially, then the running time will increase exponentially.
+Setting number of entries to 64 is kind of acceptable limit, since it took around 10 minutes with 128 as the number of entries:
+	# ---------------------------------------
+	# Property Summary                  Count
+	# ---------------------------------------
+	# Assumed                               2
+	# Covered                             129
+	# Inconclusive                          0
+	# Uncoverable                         127
+	# ---------------------------------------
+	# Total                               258
+	# ---------------------------------------
+	#
+	#
+	# --------- Process Statistics ----------
+	# Elapsed Time (s):                   552
+	# -------------- remote:0 ---------------
+	# Total CPU Time (s):                 552
+	# Memory Used (MB):                  2113
+	# ---------------------------------------
+With the result, we can also observe that the running time is also nearly doubled compared to number of entries of 64, which comforms our explanation.
+## Task 3
