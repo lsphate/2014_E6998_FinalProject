@@ -105,6 +105,7 @@ end
 endgenerate
 ```
 With the above modification and setting the number of entries to 64, we can the statistics of running time:
+
 	# ---------------------------------------
 	# Property Summary                  Count
 	# ---------------------------------------
@@ -123,8 +124,10 @@ With the above modification and setting the number of entries to 64, we can the 
 	# Total CPU Time (s):                 323
 	# Memory Used (MB):                  1089
 	# ---------------------------------------
+
 The formal runs take longer because they need to make sure whether the cover properties are covered or not. To test that, all the possible path should be tested. If it is proportional to the number of possible values which increase exponentially, then the running time will increase exponentially.
 Setting number of entries to 64 is kind of acceptable limit, since it took around 10 minutes with 128 as the number of entries:
+
 	# ---------------------------------------
 	# Property Summary                  Count
 	# ---------------------------------------
@@ -143,6 +146,7 @@ Setting number of entries to 64 is kind of acceptable limit, since it took aroun
 	# Total CPU Time (s):                 552
 	# Memory Used (MB):                  2113
 	# ---------------------------------------
+
 With the result, we can also observe that the running time is also nearly doubled compared to number of entries of 64, which comforms our explanation.
 ##Task 3
 ###A.
