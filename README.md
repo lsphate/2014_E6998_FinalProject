@@ -169,3 +169,11 @@ fifo_checker(
 With the added the OVL checker, the formal run shows the properties are proved:
 
 ![Picture5](http://i.imgur.com/qq0ppLv.png)
+
+###B.
+A possible bug could be as follows:
+```
+-   logic [ENTRIES_LOG2:0]    number_of_current_entries;
++   logic [ENTRIES_LOG2-1:0]    number_of_current_entries;
+```
+If the codes were modified as the above, the OVL fifo checker can pass. However, the coverage check will fail. Since there are only 3 bits to count the number of current entries, it will never become 4.
