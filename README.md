@@ -142,4 +142,24 @@ Setting number of entries to 64 is kind of acceptable limit, since it took aroun
 	# Memory Used (MB):                  2113
 	# ---------------------------------------
 With the result, we can also observe that the running time is also nearly doubled compared to number of entries of 64, which comforms our explanation.
-## Task 3
+##Task 3
+###A.
+We added the following codes to add a OVL FIFO checker in the **fifo.sv**:
+```
+wire [2:0] fifo_fire;
+
+ovl_fifo_index #(
+   .depth(ENTRIES)
+)
+fifo_checker(
+   .clock(clk),
+   .reset(!rst),
+   .enable(1'b1),
+   .push(in_write_ctrl),
+   .pop(in_read_ctrl),
+   .fire(fifo_fire)
+);
+```
+With the added the OVL checker, the formal run shows the properties are proved:
+
+![Picture5](http://i.imgur.com/qq0ppLv.png)
