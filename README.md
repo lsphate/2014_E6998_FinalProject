@@ -76,6 +76,7 @@ After our modification, the entrynum from 4 to 7 is not covered anymore:
 
 ##Task 2
 In the Task 1, the running time with 4-entry queue is:
+
 	# ---------------------------------------
 	# Property Summary                  Count
 	# ---------------------------------------
@@ -94,6 +95,7 @@ In the Task 1, the running time with 4-entry queue is:
 	# Total CPU Time (s):                   2
 	# Memory Used (MB):                  1089
 	# ---------------------------------------
+
 To accommodate the different sizes of the queue, we modified the codes of cover property as follows:
 ```
 generate
