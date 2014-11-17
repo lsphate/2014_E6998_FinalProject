@@ -27,12 +27,12 @@ fifo_cover_entrynum_0:
 ###B.
 All the properties are covered as follows:
 
-![Picture1](http://i.imgur.com/K39OekI.png)
+![Covered properties](http://i.imgur.com/K39OekI.png)
 
 ###C.
 Seeing the wave form of entrynum 5, we can notice that the number_of_current_entries has been decreased by 1 even if it was 0. This cause the variable overflowed, becoming 0x111.
 
-![Picture2](http://i.imgur.com/Kv5rQlD.png)
+![Wave form of entrynum is 5](http://i.imgur.com/Kv5rQlD.png)
 
 This is that piece of code in the **fifo.sv**:
 ```
@@ -55,7 +55,7 @@ We run the test again with the additional assumptions.
 ###F.
 After running the test again, the coverage is still the same. Analyzed the wave form and we noticed that the variable "out_is_empty" was aribitarily set 0 even when there is no writing.
 
-![Picture 3](http://i.imgur.com/cM7aZ3y.png)
+![Wave form of entrynum is 5 (cont.)](http://i.imgur.com/cM7aZ3y.png)
 
 ###G.
 The bug is because of these 2 line:
@@ -72,7 +72,7 @@ out_is_full <= out_is_full;
 ###I.
 After our modification, the entrynum from 4 to 7 is not covered anymore:
 
-![Picture 4](http://i.imgur.com/SsalMQA.png)
+![Properties after modification.](http://i.imgur.com/SsalMQA.png)
 
 ##Task 2
 In the Task 1, the running time with 4-entry queue is:
@@ -168,7 +168,7 @@ fifo_checker(
 ```
 With the added the OVL checker, the formal run shows the properties are proved:
 
-![Picture5](http://i.imgur.com/qq0ppLv.png)
+![OVL checker properties](http://i.imgur.com/qq0ppLv.png)
 
 ###B.
 A possible bug could be as follows:
