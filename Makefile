@@ -30,7 +30,10 @@ compile:
 		+libext+.v+.sv -y ${QHOME}/share/assertion_lib/OVL/verilog \
 		+incdir+${QHOME}/share/assertion_lib/OVL/verilog \
 		+define+OVL_SVA+OVL_ASSERT_ON+OVL_COVER_ON+OVL_XCHECK_OFF
-	$(VLOG) -sv $(DUT)
+	$(VLOG) -sv $(DUT) \
+		+libext+.v+.sv -y ${QHOME}/share/assertion_lib/OVL/verilog \
+		+incdir+${QHOME}/share/assertion_lib/OVL/verilog \
+		+define+OVL_SVA+OVL_ASSERT_ON+OVL_COVER_ON+OVL_XCHECK_OFF
 
 ###### Run Formal Analysis ########################################################
 formal:

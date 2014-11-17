@@ -96,4 +96,18 @@ for (genvar i = 0; i < (1 << (ENTRIES_LOG2 + 1)); i++) begin
 end
 endgenerate
 
+wire [2:0] fifo_fire;
+
+ovl_fifo_index #(
+   .depth(ENTRIES)
+)
+fifo_checker(
+   .clock(clk),
+   .reset(!rst),
+   .enable(1'b1),
+   .push(in_write_ctrl),
+   .pop(in_read_ctrl),
+   .fire(fifo_fire)
+);
+
 endmodule
