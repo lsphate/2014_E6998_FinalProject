@@ -46,9 +46,9 @@ end
 To add assumptions to constrain the conditions, we added the following codes into the **fifo.sv**:
 ```
 fifo_assume_entry_empty:
-	assume property (@(posedge clk) out_is_empty |-> ##[0:1] ~in_read_ctrl);
+	assume property (@(posedge clk) out_is_empty |-> ~in_read_ctrl);
 fifo_assume_entry_full:
-	assume property (@(posedge clk) out_is_full |-> ##[0:1] ~in_write_ctrl);
+	assume property (@(posedge clk) out_is_full |-> ~in_write_ctrl);
 ```
 ###E.
 We run the test again with the additional assumptions.
