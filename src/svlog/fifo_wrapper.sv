@@ -56,9 +56,15 @@ always_comb  begin
 end
 
 always_ff @(posedge clk) begin
-   fifo_is_correct <= in_read_ctrl | in_write_ctrl;
-   last_out_is_full <= out_is_full;
-   last_out_is_empty <= out_is_empty;
+   if (rst) begin
+      last_out_is_full <= 0;
+      last_out_is_empty <= 1;
+   end
+   else begin
+      fifo_is_correct <= in_read_ctrl | in_write_ctrl;
+      last_out_is_full <= out_is_full;
+      last_out_is_empty <= out_is_empty;
+   end
 end
 
 fifo_assume_entry_empty:
