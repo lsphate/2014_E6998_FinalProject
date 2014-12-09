@@ -79,14 +79,139 @@ always_comb begin
    error = (count_ingoing < count_outgoing);
 end
 
-
 my_assume_1: assume property (@(posedge clk) 
                               out_is_full |-> !in_write_ctrl);
 
 my_assume_2: assume property (@(posedge clk) 
                               out_is_empty |-> !in_read_ctrl);
 
-  
-   
+/** Coverage **/
+covmet_inout_00000_covered:
+   cover property (@(posedge clk)
+   !in_write_ctrl && !in_read_ctrl && !out_is_full && !out_is_empty && !error);
+
+covmet_inout_00001:
+   cover property (@(posedge clk)
+   !in_write_ctrl && !in_read_ctrl && !out_is_full && !out_is_empty && error);
+
+covmet_inout_00010_covered:
+   cover property (@(posedge clk)
+   !in_write_ctrl && !in_read_ctrl && !out_is_full && out_is_empty && !error);
+
+covmet_inout_00011:
+   cover property (@(posedge clk)
+   !in_write_ctrl && !in_read_ctrl && !out_is_full && out_is_empty && error);
+
+covmet_inout_00100_covered:
+   cover property (@(posedge clk)
+   !in_write_ctrl && !in_read_ctrl && out_is_full && !out_is_empty && !error);
+
+covmet_inout_00101:
+   cover property (@(posedge clk)
+   !in_write_ctrl && !in_read_ctrl && out_is_full && !out_is_empty && error);
+
+covmet_inout_00110:
+   cover property (@(posedge clk)
+   !in_write_ctrl && !in_read_ctrl && out_is_full && out_is_empty && !error);
+
+covmet_inout_00111:
+   cover property (@(posedge clk)
+   !in_write_ctrl && !in_read_ctrl && out_is_full && out_is_empty && error);
+
+covmet_inout_01000_covered:
+   cover property (@(posedge clk)
+   !in_write_ctrl && in_read_ctrl && !out_is_full && !out_is_empty && !error);
+
+covmet_inout_01001:
+   cover property (@(posedge clk)
+   !in_write_ctrl && in_read_ctrl && !out_is_full && !out_is_empty && error);
+
+covmet_inout_01010:
+   cover property (@(posedge clk)
+   !in_write_ctrl && in_read_ctrl && !out_is_full && out_is_empty && !error);
+
+covmet_inout_01011:
+   cover property (@(posedge clk)
+   !in_write_ctrl && in_read_ctrl && !out_is_full && out_is_empty && error);
+
+covmet_inout_01100_covered:
+   cover property (@(posedge clk)
+   !in_write_ctrl && in_read_ctrl && out_is_full && !out_is_empty && !error);
+
+covmet_inout_01101:
+   cover property (@(posedge clk)
+   !in_write_ctrl && in_read_ctrl && out_is_full && !out_is_empty && error);
+
+covmet_inout_01110:
+   cover property (@(posedge clk)
+   !in_write_ctrl && in_read_ctrl && out_is_full && out_is_empty && !error);
+
+covmet_inout_01111:
+   cover property (@(posedge clk)
+   !in_write_ctrl && in_read_ctrl && out_is_full && out_is_empty && error);
+
+covmet_inout_10000_covered:
+   cover property (@(posedge clk)
+   in_write_ctrl && !in_read_ctrl && !out_is_full && !out_is_empty && !error);
+
+covmet_inout_10001:
+   cover property (@(posedge clk)
+   in_write_ctrl && !in_read_ctrl && !out_is_full && !out_is_empty && error);
+
+covmet_inout_10010_covered:
+   cover property (@(posedge clk)
+   in_write_ctrl && !in_read_ctrl && !out_is_full && out_is_empty && !error);
+
+covmet_inout_10011:
+   cover property (@(posedge clk)
+   in_write_ctrl && !in_read_ctrl && !out_is_full && out_is_empty && error);
+
+covmet_inout_10100:
+   cover property (@(posedge clk)
+   in_write_ctrl && !in_read_ctrl && out_is_full && !out_is_empty && !error);
+
+covmet_inout_10101:
+   cover property (@(posedge clk)
+   in_write_ctrl && !in_read_ctrl && out_is_full && !out_is_empty && error);
+
+covmet_inout_10110:
+   cover property (@(posedge clk)
+   in_write_ctrl && !in_read_ctrl && out_is_full && out_is_empty && !error);
+
+covmet_inout_10111:
+   cover property (@(posedge clk)
+   in_write_ctrl && !in_read_ctrl && out_is_full && out_is_empty && error);
+
+covmet_inout_11000_covered:
+   cover property (@(posedge clk)
+   in_write_ctrl && in_read_ctrl && !out_is_full && !out_is_empty && !error);
+
+covmet_inout_11001:
+   cover property (@(posedge clk)
+   in_write_ctrl && in_read_ctrl && !out_is_full && !out_is_empty && error);
+
+covmet_inout_11010:
+   cover property (@(posedge clk)
+   in_write_ctrl && in_read_ctrl && !out_is_full && out_is_empty && !error);
+
+covmet_inout_11011:
+   cover property (@(posedge clk)
+   in_write_ctrl && in_read_ctrl && !out_is_full && out_is_empty && error);
+
+covmet_inout_11100:
+   cover property (@(posedge clk)
+   in_write_ctrl && in_read_ctrl && out_is_full && !out_is_empty && !error);
+
+covmet_inout_11101:
+   cover property (@(posedge clk)
+   in_write_ctrl && in_read_ctrl && out_is_full && !out_is_empty && error);
+
+covmet_inout_11110:
+   cover property (@(posedge clk)
+   in_write_ctrl && in_read_ctrl && out_is_full && out_is_empty && !error);
+
+covmet_inout_11111:
+   cover property (@(posedge clk)
+   in_write_ctrl && in_read_ctrl && out_is_full && out_is_empty && error);
+
 endmodule
-   

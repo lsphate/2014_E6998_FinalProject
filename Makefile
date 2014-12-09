@@ -14,7 +14,8 @@ VLIB = ${QHOME}/modeltech/plat/vlib
 VMAP = ${QHOME}/modeltech/plat/vmap
 VLOG = ${QHOME}/modeltech/plat/vlog
 
-DUT = ./src/svlog/fifo.sv ./src/svlog/fifo_wrapper.sv
+#DUT = ./src/svlog/fifo.sv ./src/svlog/fifo_wrapper.sv
+DUT = ./src/svlog/fifo_with_error_checker.sv
 SVA_BIND = ./src/assertions/sva_bind_fifo.sv
 SVA_CHECK = ./src/assertions/sva_fifo.sv
 
@@ -30,10 +31,11 @@ compile:
 		+libext+.v+.sv -y ${QHOME}/share/assertion_lib/OVL/verilog \
 		+incdir+${QHOME}/share/assertion_lib/OVL/verilog \
 		+define+OVL_SVA+OVL_ASSERT_ON+OVL_COVER_ON+OVL_XCHECK_OFF
-	$(VLOG) -sv $(DUT) \
+#	$(VLOG) -sv $(DUT) \
 		+libext+.v+.sv -y ${QHOME}/share/assertion_lib/OVL/verilog \
 		+incdir+${QHOME}/share/assertion_lib/OVL/verilog \
 		+define+OVL_SVA+OVL_ASSERT_ON+OVL_COVER_ON+OVL_XCHECK_OFF
+	$(VLOG) -sv $(DUT)
 
 ###### Run Formal Analysis ########################################################
 formal:
@@ -45,7 +47,7 @@ formal:
 		exit"
 	qformal -c -od Output_Results -do "\
 		do qs_files/directives.tcl; \
-		formal compile -d fifo_wrapper \
+		formal compile -d fifo \
 			-target_cover_statements; \
 		formal verify -init qs_files/fifo.init -effort high; \
 		exit"
