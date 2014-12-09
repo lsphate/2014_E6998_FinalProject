@@ -61,5 +61,24 @@ always_ff @(posedge clk) begin
    last_out_is_empty <= out_is_empty;
 end
 
+fifo_assume_entry_empty:
+   assume property (@(posedge clk) out_is_empty |-> ~in_read_ctrl);
+fifo_assume_entry_full:
+   assume property (@(posedge clk) out_is_full |-> ~in_write_ctrl);
+
+wire [2:0] fifo_fire;
+
+ovl_fifo_index #(
+   .depth(ENTRIES)
+)
+fifo_checker(
+   .clock(clk),
+   .reset(!rst),
+   .enable(1'b1),
+   .push(in_write_ctrl),
+   .pop(in_read_ctrl),
+   .fire(fifo_fire)
+);
+
 endmodule
    

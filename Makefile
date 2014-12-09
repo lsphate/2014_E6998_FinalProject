@@ -14,7 +14,7 @@ VLIB = ${QHOME}/modeltech/plat/vlib
 VMAP = ${QHOME}/modeltech/plat/vmap
 VLOG = ${QHOME}/modeltech/plat/vlog
 
-DUT = ./src/svlog/fifo.sv
+DUT = ./src/svlog/fifo.sv ./src/svlog/fifo_wrapper.sv
 SVA_BIND = ./src/assertions/sva_bind_fifo.sv
 SVA_CHECK = ./src/assertions/sva_fifo.sv
 
@@ -45,7 +45,7 @@ formal:
 		exit"
 	qformal -c -od Output_Results -do "\
 		do qs_files/directives.tcl; \
-		formal compile -d fifo \
+		formal compile -d fifo_wrapper \
 			-target_cover_statements; \
 		formal verify -init qs_files/fifo.init -effort high; \
 		exit"
